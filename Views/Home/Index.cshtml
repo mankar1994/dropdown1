@@ -1,0 +1,109 @@
+﻿@{ ViewData["Title"] = "Home Page"; }
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <div class="row">
+        <div class="col-4 offset-4">
+            <div class="form-group">
+                <label>Select Country</label>
+                <select class="form-control country">
+                    <option>Select</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Select State</label>
+                <select class="form-control state">
+                    <option>Select</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Select City</label>
+                <select class="form-control city">
+                    <option>Select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(document).ready(function () {
+        LoadCountry()
+        $(".country").change(function () {
+            var id = $(this).val();
+            $(".state").empty();
+            $(".state").append("<option>select</option>")
+            $.get('@Url.Action("GetStates", "Home")', { "Id": id }, function (Result) {
+            console.log(Result)
+            $.each(Result, function (i, data) {
+            $(".state").append("<option value="+data.id+">"+data.stateName+"</option>")
+            })
+            })
+            })
+            $(".state").change(function () {
+            var id = $(this).val();
+            $(".city").empty();
+            $(".city").append("<option>select</option>")
+            $.get('@Url.Action("GetCities", "Home")', { "Id": id }, function (Result) {
+            console.log(Result)
+            $.each(Result, function (i, data) {
+            $(".city").append("<option value="+data.id+">"+data.cityName+"</option>")
+            })
+            })
+            })
+            })
+            function LoadCountry() {
+            $.get('@Url.Action("GetCountries", "Home")', function (Result) {
+            $.each(Result, function (i, data) {
+            $(".country").append("<option value="+data.id+">"+data.countryName+"</option>")
+            })
+            })
+            }
+</script>
+            @*<script>
+                    $(document).ready(function () {
+                        loadCountries();
+
+                        $(".country").change(function () {
+                            var id = $(this).val();
+                            console.log("Country Id " +id);
+                            $(".state").empty();
+                            $(".state").append("<option>select</option>")
+                            $.get('@Url.Action("GetStates", "Home")', { "Id": id }, function (result) {
+                                console.log(result)
+                            $.each(result, function (i, data) {
+                                $(".state").append("<option value="+data.Id+">"+data.stateName+"</option >")
+                            })
+                        })
+                        })
+
+                        $(".state").change(function () {
+
+                            var id = $(this).val();
+                            console.log("CityId : "+id)
+                           $(".city").empty();
+
+                            $(".city").append("<option>select</option>")
+                            $.get('@Url.Action("GetCities", "Home")', { "Id": id }, function (result) {
+                                console.log(result)
+                                $.each(result, function (i, data) {
+                                console.log(data)
+                                $(".city").append("<option value="+data.Id+">"+data.cityName+"</option >")
+                            })
+                        })
+                        })
+
+
+
+                    })
+
+                    function loadCountries() {
+                        $.get('@Url.Action("GetCountries","Home")', function (result) {
+                            console.log(result);
+                            $.each(result, function (i, data) {
+                                $(".country").append("<option value=" + data.id + ">" + data.countryName + "</option>")
+                            })
+                        })
+                    }
+                </script>*@
+
