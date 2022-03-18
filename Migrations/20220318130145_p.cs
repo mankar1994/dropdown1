@@ -2,7 +2,7 @@
 
 namespace DropDownApp.Migrations
 {
-    public partial class m11 : Migration
+    public partial class p : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

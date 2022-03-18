@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DropDownApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220305095429_m11")]
-    partial class m11
+    [Migration("20220318130145_p")]
+    partial class p
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
